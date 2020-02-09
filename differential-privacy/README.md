@@ -38,3 +38,16 @@ Besides above hyperparameters, following hyperparameters also can affect the fin
 * Kernel size, specifically for CNN: Larger kernel size represents larger receptive field. The kernel size is set as either 5 or 9. 
 * Number of kernels, specifically for CNN: Larger number of kernels generates more feature map, which can capture more correlations oflocal genotypes. The number of kernels is in {8, 16}.
 * ℓ1 norm for model sparsity: Larger values of the ℓ1 norm lead to more sparse weights while a value of 0 represents no sparsity. We set ℓ1 norm values as 0.001352, selected by using glmnet package in R programming language.
+
+
+## Effectiveness of privacy budget on target accuracy
+
+Generally speaking, small noise has little effect and large noise has significant effect on the model performance. In order to evaluate the impact of DP on utility of machine learning models, we quantitatively investigate the effectiveness of DP budgets by incorporating DP to Lasso and CNN and conducting grid search of different privacy budget levels on the target dataset.   
+
+Fig. 1 shows the target accuracy of target models under different privacy budget ε levels. A large privacy budget slightly reduces the model performance, however, it can’t provide strong privacy guarantee. Smaller privacy budget (ε ≤ 10) provides stronger privacy guarantee, but it sharply reduces the model performance. It is thus essential to find a trade-off between model utility and privacy. As shown by our results, the privacy budget in the range of (5,10) best addresses the trade-off between model accuracy and privacy.
+
+<div align="center">
+<img src="effect-dp.png" width="700" />
+<p> Figure 1. Performance of target models under different privacy budget levels. The horizontal line represents the performance of target model without DP. The target accuracy is measured by the mean accuracy of 5-fold cross validation. The curves are fitted regression lines, and the corresponding shadow areas are 95% confidence intervals for corresponding regressions.</p>
+</div>
+
